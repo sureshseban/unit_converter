@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 
@@ -8,8 +7,16 @@ function App() {
   const [flag, setFlag] = useState(true);
   const [values, setValues] = useState({ input: '', inputType: 'meter', result: '', resultType: 'centimeter' });
 
+  /**
+   * 
+   * @param {*} name the input fields
+   * sets the states values
+   */
   const getHandler = (name) => {
     return (event) => {
+      if (name === 'input' || name === 'result') {
+        if (isNaN(event.target.value)) return false;
+      }
       setChangedValue(name);
       setFlag(!flag);
       setValues({ ...values, [name]: event.target.value });
